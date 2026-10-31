@@ -1,0 +1,17 @@
+{
+  "name": "inverter-concept-sims",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Interactive averaged-EMT simulations of GFL/GFM inverter concepts, renderable to video.",
+  "scripts": {
+    "serve": "node tools/serve.mjs",
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "snap": "node tools/snap.mjs",
+    "render": "node tools/render.mjs",
+    "single": "node tools/build-single.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
