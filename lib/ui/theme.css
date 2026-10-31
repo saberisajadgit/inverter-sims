@@ -8,6 +8,7 @@
   --gfm: #15803d;
   --phase-a: #2563eb;   --phase-b: #dc2626;    --phase-c: #d4a017;
   --vref: #374151;
+  --freq: #7c3aed;
   --limit: #dc2626;
   --fault-band: rgba(253, 230, 138, 0.35);
   --pill-warn-bg: #fff7ed;  --pill-warn-ink: #9a3412;
@@ -23,7 +24,7 @@
   :root:not(.render):not([data-theme="light"]) {
     --bg: #0b0f14; --panel: #111827; --panel-border: #374151;
     --ink: #e5e7eb; --muted: #9ca3af; --rule: #e5e7eb;
-    --grid: #1f2937; --axis: #6b7280; --vref: #d1d5db;
+    --grid: #1f2937; --axis: #6b7280; --vref: #d1d5db; --freq: #a78bfa;
     --fault-band: rgba(253, 230, 138, 0.14);
     --pill-warn-bg: #431407; --pill-warn-ink: #fdba74;
     --pill-ok-bg: #052e16;   --pill-ok-ink: #86efac;
