@@ -44,11 +44,26 @@ choose, clarify or deviate, and why. Conventions in §3 and the solver method in
 | 9 | Δf = 0.05·0.3·60 = 0.9 Hz | Δf = m_p·ΔP_delivered·f_b (ΔP_delivered = 0.283 gives 0.848 Hz) | V_PCC sags behind X_v, so a resistive load step delivers less than its nominal 0.3 pu. The droop law holds exactly for the delivered ΔP. |
 | 10 | ΔP/(2H)·f_b | the same, using the delivered ΔP | Same reason as test 9. |
 
+## E02 fault definitions
+
+| Button | Model | Why |
+|---|---|---|
+| Close-in | bolted fault, m = 0.02 | as spec |
+| Mid | bolted fault, m = 0.5 | as spec. At SCR 5 V_PCC still collapses to about 0.05 pu, so a realistic GFL blocks here too; the scenario text says so. |
+| Far | **grid source dips to 0.7 pu** (`sag`), SLD marker at m = 0.98, labelled "remote fault" | The spec's m = 0.98 with R_fault = 0.005 leaves only 0.004 pu of line behind the fault. The fault node then keeps 0.78 pu, but its angle jumps by −39°, so the GFM exports extra P and *absorbs* Q, which is misleading. A bolted fault anywhere on the line pins the GFM at I_max, so X_v changes nothing. A shallow remote dip keeps the GFM below its limit: its current (1.05 / 0.96 / 0.90 pu for X_v = 0.10 / 0.15 / 0.20) is set by X_v, which is the point of scenarios 6–8. |
+
+Other changes from the spec's E02 list:
+- The Ideal/Realistic toggle only changes the GFL: ideal means an oracle angle and no
+  blocking. The GFM has no PLL, so it is identical in both.
+- "Far, ideal" is dropped because it is identical to "Far, realistic". Its slot holds
+  "Close-in · no limit", the GFM `voltageSource` case. That case backs the
+  spec's expectation "GFM unlimited first peak > 3 pu" (it measures 5.98 pu).
+- At the far dip the GFL is in K-factor mode (V_PCC ≈ 0.76), not in its deadband.
+- Scenario 4 in the spec says "slower GFL rise". The engine shows no such difference,
+  so the text says what actually happens.
+
 ## Behaviours worth knowing before writing episodes
 
-- **E02 "Mid, ideal".** A bolted mid-line fault at SCR 5 puts V_PCC at about 0.05 pu, so a
-  realistic GFL blocks. To show K-factor injection, use `realistic: false` (and/or
-  `pll.ideal: true`) or a non-zero `R_fault`.
 - **Weak-grid GFL ride-through.** At SCR ≤ 3 with K = 2 and deep sags (≤ 0.3), or
   SCR 2 with K = 4, the GFL loses stability: the PLL hits its ±10 % clamps. This
   is a credible real effect, since K-factor gain × X_g ≳ 1 and GFL loses

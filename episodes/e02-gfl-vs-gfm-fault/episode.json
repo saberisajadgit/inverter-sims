@@ -1,0 +1,15 @@
+{
+  "title": "GFL vs GFM Fault Response",
+  "subtitle": "Inverter current during a 3-phase fault · 60 Hz · peak per-unit",
+  "credit": "Content by <Your Name>",
+  "layout": "portrait45",
+  "fb": 60,
+  "timeline": {
+    "intro": 1.5,
+    "perScenario": 5.0,
+    "holdAtEnd": 1.0,
+    "outro": 2.0,
+    "captions": true,
+    "easing": "linear"
+  }
+}
