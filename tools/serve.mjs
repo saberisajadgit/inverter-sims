@@ -27,7 +27,11 @@ const server = http.createServer((req, res) => {
   let file = path.normalize(path.join(ROOT, decodeURIComponent(url.pathname)));
   if (!file.startsWith(ROOT)) { res.writeHead(403).end('forbidden'); return; }
   fs.stat(file, (err, st) => {
-    if (!err && st.isDirectory()) file = path.join(file, 'index.html');
+    if (!err && st.isDirectory()) {
+      // relative URLs in index.html need the trailing slash
+      if (!url.pathname.endsWith('/')) { res.writeHead(301, { Location: url.pathname + '/' + url.search }).end(); return; }
+      file = path.join(file, 'index.html');
+    }
     fs.readFile(file, (err2, data) => {
       if (err2) { res.writeHead(404, { 'Content-Type': 'text/plain' }).end('not found'); return; }
       res.writeHead(200, {

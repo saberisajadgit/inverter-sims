@@ -1,6 +1,7 @@
 {
   "title": "GFL vs GFM Fault Response",
   "subtitle": "Inverter current during a 3-phase fault · 60 Hz · peak per-unit",
+  "hook": "During a fault, a grid-following inverter needs a voltage to follow. A grid-forming one makes its own. Watch what happens to their current.",
   "credit": "Content by <Your Name>",
   "layout": "portrait45",
   "fb": 60,
@@ -11,5 +12,11 @@
     "outro": 2.0,
     "captions": true,
     "easing": "linear"
-  }
+  },
+  "outro": [
+    "Close to the inverter, the PCC voltage collapses: the GFL loses its PLL angle and blocks; the GFM keeps feeding current at its limit.",
+    "Without a current limit a GFM would push 3–6 pu: the limiter, not X<sub>v</sub>, sets its contribution to deep faults.",
+    "For shallow, remote dips the GFM current is set by its virtual impedance X<sub>v</sub>; the GFL by its K-factor."
+  ],
+  "interactiveNote": "Averaged EMT model · SCR 5 · I<sub>max</sub> 1.2 pu"
 }
