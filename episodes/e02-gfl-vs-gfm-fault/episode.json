@@ -2,7 +2,7 @@
   "title": "GFL vs GFM Fault Response",
   "subtitle": "Inverter current during a 3-phase fault · 60 Hz · peak per-unit",
   "hook": "During a fault, a grid-following inverter needs a voltage to follow. A grid-forming one makes its own. Watch what happens to their current.",
-  "credit": "Content by <Your Name>",
+  "credit": "Simulation by Sam Saberi",
   "layout": "portrait45",
   "fb": 60,
   "timeline": {
@@ -25,5 +25,6 @@
     "holdAtEnd": 4.0,
     "outro": 3.0,
     "captions": true
-  }
+  },
+  "creditUrl": "https://www.linkedin.com/in/saberisam/"
 }

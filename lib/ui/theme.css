@@ -113,7 +113,8 @@ html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: v
 
 /* footer */
 .foot { font-size: 15px; color: var(--muted); line-height: 1.45; }
-.foot .credit { color: var(--ink); font-weight: 600; margin-top: 4px; }
+.foot .credit { color: var(--ink); font-weight: 600; margin-top: 4px; font-size: 16px; }
+.foot .credit a { color: var(--accent); }
 
 /* interactive toolbar */
 .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
