@@ -10,7 +10,7 @@ choose, clarify or deviate, and why. Conventions in §3 and the solver method in
 |---|---|---|---|
 | Current-loop v_c feedforward | raw `v_dq,meas` | first-order dq LPF, `ctrl.ffHz = 150` Hz | Raw sampled feedforward through the 1.5·Ts delay forms a loop with Z_g that oscillates at 0.6–1 kHz: the GFM is unstable for SCR ≲ 5, and a GFL injecting K-factor Iq at SCR 5 also goes unstable. Feedforward filtering is the usual industrial remedy. Cost: the current overshoot at fault inception lasts ≈2 ms instead of <1 ms (see test 7). |
 | GFM current-loop bandwidth | f_c = 800 Hz | GFM default `fc = 500` Hz (GFL keeps 800) | At 800 Hz the GFM virtual-admittance path is still unstable below SCR ≈ 1.5. At 500 Hz it is stable from SCR 1.1 to 20. |
-| GFM `viCurrentRef` virtual impedance | `i_ref = (E·e^{jθ} − v_c)/(R_v + jX_v)` | dynamic virtual RL in the GFM dq frame: `L_v di/dt + (R_v + jωX_v) i = E − v_c,f`, with v_c LPF in dq at `fvi = 300` Hz; trapezoidal integration | This is identical to the algebraic form at the fundamental. The algebraic form feeds measured v_c back with gain 1/|Z_v| ≈ 6.7 and is unstable when \|Z_g\| > \|Z_v\|. As a bonus, the dynamic form produces the physical DC offset at fault inception. The circular limiter clamps the virtual-branch current state. |
+| GFM `viCurrentRef` virtual impedance | `i_ref = (E·e^{jθ} − v_c)/(R_v + jX_v)` | dynamic virtual RL in the GFM dq frame: `L_v di/dt + (R_v + jωX_v) i = E − v_c,f`, with v_c LPF in dq at `fvi = 300` Hz; trapezoidal integration | This is identical to the algebraic form at the fundamental. The algebraic form feeds measured v_c back with gain 1/|Z_v| ≈ 6.7 and is unstable when \|Z_g\| > \|Z_v\|. As a bonus, the dynamic form produces the physical DC offset at fault inception. The circular limiter scales only the *output* reference. The virtual-branch state runs unclamped (R_v bounds it at \|u\|/\|Z_v\|), so a limited current keeps the impedance angle and lags E by about 80°. An earlier version clamped the state, which pulled the limited current to within about 10° of E. |
 | Delay compensation | not specified | the αβ command is rotated ahead by 1.5·ω·Ts (0.5·ω·Ts if `delay: false`) | Standard practice: it cancels the mean ZOH plus transport lag, so steady state is exact and the warm start holds. |
 | GFL blocking | block when \|v\| < V_block | block when \|v\| < V_block for `tBlock = 1` ms | Without debouncing, one sample of LC ringing at fault inception tripped a 20 ms block on faults where V_PCC settles at 0.35–0.55 pu. Bolted faults still block within 3–7 ms. |
 | "Ideal" PLL (`pll.ideal: true`) | not defined | angle = grid source angle + its pre-event offset (an oracle) | This gives E02's "ideal" model an angle even at V ≈ 0. |
@@ -75,3 +75,11 @@ Other changes from the spec's E02 list:
   (for example, show the most frequent mode over the last ~2 ms).
 - **E01-4 is reproduced.** At SCR 1.3, a 60 Hz PLL is unstable and a 20 Hz PLL is stable.
 - **Speed.** A 0.62 s case (0.5 s warm-up plus a 0.12 s window) runs in about 15–30 ms in Node.
+
+## Video production
+
+- `node tools/render.mjs <episode> <out.mp4> <linkedin|youtube> [--final] [--only N]`.
+  `--only N` renders scenario N on its own using `episode.json → singleTimeline`
+  (2.5 s intro card, 8 s sweep, 4 s hold with caption, 3 s takeaway card: 17.5 s in all).
+- A `credit` that still contains the `<Your Name>` placeholder is hidden in both the
+  video and the page.

@@ -1,6 +1,7 @@
 // Render an episode to MP4 (SIM_SPEC §8.2): Playwright drives render mode
 // frame by frame, ffmpeg encodes. Needs `npm run serve` running and ffmpeg on PATH.
-// usage: node tools/render.mjs episodes/e02-gfl-vs-gfm-fault output/e02_linkedin.mp4 linkedin [--final] [--audio music.mp3]
+// usage: node tools/render.mjs episodes/e02-gfl-vs-gfm-fault output/e02_linkedin.mp4 linkedin [--final] [--audio music.mp3] [--only N]
+// --only N renders scenario N (1-based) on its own, using episode.json singleTimeline.
 // Uses the locally installed Chrome (or Edge) so no Playwright browser download is needed.
 import { chromium } from 'playwright';
 import { spawn } from 'node:child_process';
@@ -10,7 +11,8 @@ import path from 'node:path';
 const args = process.argv.slice(2);
 const flag = (name) => args.includes(name);
 const opt = (name) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : null; };
-const [ep, out, fmt = 'linkedin'] = args.filter((a, i) => !a.startsWith('--') && args[i - 1] !== '--audio');
+const [ep, out, fmt = 'linkedin'] = args.filter((a, i) => !a.startsWith('--') && !['--audio', '--only'].includes(args[i - 1]));
+const only = opt('--only');
 if (!ep || !out) { console.error('usage: node tools/render.mjs <episode dir> <out.mp4> [linkedin|youtube|square] [--final] [--audio file]'); process.exit(1); }
 
 const SIZES = { linkedin: [1080, 1350], youtube: [1920, 1080], square: [1080, 1080] };
@@ -30,7 +32,7 @@ fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });
 const browser = await launch();
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
 const epPath = ep.replace(/\\/g, '/').replace(/\/$/, '');
-await page.goto(`http://localhost:5173/${epPath}/index.html?render=1&w=${W}&h=${H}`);
+await page.goto(`http://localhost:5173/${epPath}/index.html?render=1&w=${W}&h=${H}${only ? `&only=${only}` : ''}`);
 await page.waitForFunction(() => window.SIM && window.SIM.ready === true, null, { timeout: 120000 });
 const duration = await page.evaluate(() => window.SIM.videoDuration);
 

@@ -18,5 +18,12 @@
     "Without a current limit a GFM would push 3–6 pu: the limiter, not X<sub>v</sub>, sets its contribution to deep faults.",
     "For shallow, remote dips the GFM current is set by its virtual impedance X<sub>v</sub>; the GFL by its K-factor."
   ],
-  "interactiveNote": "Averaged EMT model · SCR 5 · I<sub>max</sub> 1.2 pu"
+  "interactiveNote": "Averaged EMT model · SCR 5 · I<sub>max</sub> 1.2 pu",
+  "singleTimeline": {
+    "intro": 2.5,
+    "perScenario": 8.0,
+    "holdAtEnd": 4.0,
+    "outro": 3.0,
+    "captions": true
+  }
 }

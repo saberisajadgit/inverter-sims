@@ -136,7 +136,7 @@ export default {
       overrides: REAL,
       events: far,
       explain: {
-        see: 'GFL injects ~0.7 pu; GFM touches the limit for a few ms, then settles near 0.96 pu.',
+        see: 'GFL injects ~0.7 pu; GFM is held at its limit for about 1.5 cycles, then settles near 0.96 pu.',
         why: 'GFL: Iq = K·(0.9 − V). GFM: below the limit its current is (E − v)/Z<sub>v</sub>, a voltage source behind X<sub>v</sub>.',
         takeaway: 'For shallow dips the GFM contribution is set by its virtual impedance and arrives within the first cycle.',
       },
