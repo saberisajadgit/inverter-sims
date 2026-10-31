@@ -2,12 +2,16 @@
 
 Interactive, browser-based simulations of grid-following (GFL) and grid-forming (GFM) inverter behaviour, built on an averaged EMT engine. They also render to video.
 
-**Live:** open `index.html` on the deployed site, or go straight to the episode:
+## Live demo
 
-- **E02 · GFL vs GFM fault response.** 8 scenarios covering close-in, mid-line and remote faults. Scrub through time, read phasors, P and Q, and export CSV.
-- **Engine viewer.** Raw traces for any preset or a hand-edited config.
+**https://saberisajadgit.github.io/inverter-sims/**
 
-Simulation by **Sam Saberi**: [linkedin.com/in/saberisam](https://www.linkedin.com/in/saberisam/)
+- **[E02 · GFL vs GFM fault response](https://saberisajadgit.github.io/inverter-sims/episodes/e02-gfl-vs-gfm-fault/).** 8 scenarios covering close-in, mid-line and remote faults. Scrub through time, read phasors, P and Q, and export CSV. Add `?scenario=N` to the URL to open a specific scenario (1–8).
+- **[Engine viewer](https://saberisajadgit.github.io/inverter-sims/viewer/).** Raw traces for any preset or a hand-edited config.
+
+Everything runs in the browser; there is nothing to install.
+
+Author: **Sam Saberi**, [linkedin.com/in/saberisam](https://www.linkedin.com/in/saberisam/)
 
 ## The model
 
